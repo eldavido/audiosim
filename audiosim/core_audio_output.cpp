@@ -8,8 +8,8 @@
 
 #include "core_audio_output.hpp"
 
-const int SAMPLE_RATE = 44100;
-const int FREQ = 440;
+const Float32 SAMPLE_RATE = 44100;
+const Float32 FREQ = 440;
 
 CoreAudioOutput::CoreAudioOutput() {
     initializeConstantValuedStructures();
@@ -51,10 +51,10 @@ void CoreAudioOutput::initializeConstantValuedStructures() {
     
     mStreamFormat.mSampleRate = SAMPLE_RATE;
     mStreamFormat.mFormatID = kAudioFormatLinearPCM;
-    mStreamFormat.mFormatFlags = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
-    mStreamFormat.mBytesPerPacket = 4;   // it's a float
+    mStreamFormat.mFormatFlags = kAudioFormatFlagIsFloat;
+    mStreamFormat.mBytesPerPacket = 4;   // float32
     mStreamFormat.mFramesPerPacket = 1;
-    mStreamFormat.mBytesPerFrame = 4;    // float
+    mStreamFormat.mBytesPerFrame = 4;    // float32
     mStreamFormat.mChannelsPerFrame = 1; // mono
     mStreamFormat.mBitsPerChannel = 32;  // float32
     
@@ -73,7 +73,7 @@ OSStatus CoreAudioOutput::coreAudioCallback(void *inRefCon,
 OSStatus CoreAudioOutput::render(AudioUnitRenderActionFlags *ioActionFlags,
                                             const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
                                             UInt32 inNumberFrames, AudioBufferList *ioData) {
-    const double amplitude = 0.25;
+    const double amplitude = 1.0;
     const int channel = 0;
     
     Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
