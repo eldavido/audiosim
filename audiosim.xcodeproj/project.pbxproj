@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214C5B991D7B8E15005B0BA7 /* sine_source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214C5B971D7B8E15005B0BA7 /* sine_source.cpp */; };
 		21B9132C1D7B535800F94C37 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21B9132B1D7B535800F94C37 /* main.mm */; };
 		21B913331D7B541300F94C37 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B913321D7B541300F94C37 /* CoreAudio.framework */; };
 		21B9133B1D7B5AD000F94C37 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B9133A1D7B5AD000F94C37 /* AudioUnit.framework */; };
@@ -26,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		214C5B971D7B8E15005B0BA7 /* sine_source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sine_source.cpp; sourceTree = "<group>"; };
+		214C5B981D7B8E15005B0BA7 /* sine_source.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sine_source.hpp; sourceTree = "<group>"; };
+		214C5B9A1D7B933E005B0BA7 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		21B913281D7B535800F94C37 /* audiosim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = audiosim; sourceTree = BUILT_PRODUCTS_DIR; };
 		21B9132B1D7B535800F94C37 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		21B913321D7B541300F94C37 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -71,6 +75,9 @@
 				21B9132B1D7B535800F94C37 /* main.mm */,
 				21B9133C1D7B6F4700F94C37 /* core_audio_output.cpp */,
 				21B9133D1D7B6F4700F94C37 /* core_audio_output.hpp */,
+				214C5B971D7B8E15005B0BA7 /* sine_source.cpp */,
+				214C5B981D7B8E15005B0BA7 /* sine_source.hpp */,
+				214C5B9A1D7B933E005B0BA7 /* constants.h */,
 			);
 			path = audiosim;
 			sourceTree = "<group>";
@@ -133,6 +140,7 @@
 			files = (
 				21B9133E1D7B6F4700F94C37 /* core_audio_output.cpp in Sources */,
 				21B9132C1D7B535800F94C37 /* main.mm in Sources */,
+				214C5B991D7B8E15005B0BA7 /* sine_source.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

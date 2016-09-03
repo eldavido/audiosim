@@ -8,12 +8,13 @@
 
 #include "core_audio_output.hpp"
 
-const Float32 SAMPLE_RATE = 44100;
-const Float32 FREQ = 440;
-
 CoreAudioOutput::CoreAudioOutput() {
     initializeConstantValuedStructures();
     mRenderedFrames = 0;
+    
+    mSource1 = new SineSource(440);
+    mSource2 = new SineSource(430);
+    mSource3 = new SineSource(420);
 }
 
 void CoreAudioOutput::Init() {
@@ -35,6 +36,11 @@ void CoreAudioOutput::Init() {
     
     err = AudioUnitInitialize(mOutputInstance);
     //NSCAssert1(err == noErr, @"Error initializing unit: %hd", err);
+    
+    // Allocate 0.5s worth of output buffer; this should be plenty.
+    mSrc1Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
+    mSrc2Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
+    mSrc3Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
 }
 
 void CoreAudioOutput::Start() {
@@ -73,17 +79,16 @@ OSStatus CoreAudioOutput::coreAudioCallback(void *inRefCon,
 OSStatus CoreAudioOutput::render(AudioUnitRenderActionFlags *ioActionFlags,
                                             const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
                                             UInt32 inNumberFrames, AudioBufferList *ioData) {
-    const double amplitude = 1.0;
-    const int channel = 0;
-    
+    int channel = 0;
     Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
-    Float32 coeff = 2*M_PI*FREQ/SAMPLE_RATE;
     
-    // Generate the samples
-    for (UInt32 frame = 0; frame < inNumberFrames; ++frame) {
-        buffer[frame] = amplitude * sin(coeff * (frame+mRenderedFrames));
+    mSource1->render_next(mSrc1Buf, inNumberFrames);
+    mSource2->render_next(mSrc2Buf, inNumberFrames);
+    mSource3->render_next(mSrc3Buf, inNumberFrames);
+    
+    for (int i = 0; i < inNumberFrames; ++i) {
+        buffer[i] = (0.33 * mSrc1Buf[i]) + (0.33 * mSrc2Buf[i]) + (0.33 * mSrc3Buf[i]);
     }
     
-    mRenderedFrames += inNumberFrames;
     return noErr;
 }

@@ -12,6 +12,9 @@
 #import <AudioUnit/AudioUnit.h>
 
 #include <math.h>
+#include <stdlib.h>
+#include "constants.h"
+#include "sine_source.hpp"
 
 class CoreAudioOutput {
 public:
@@ -36,6 +39,14 @@ private:
     OSStatus render(AudioUnitRenderActionFlags *ioActionFlags,
                 const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
                 UInt32 inNumberFrames, AudioBufferList *ioData);
+    
+    SineSource *mSource1;
+    SineSource *mSource2;
+    SineSource *mSource3;
+    
+    float *mSrc1Buf;
+    float *mSrc2Buf;
+    float *mSrc3Buf;
 };
 
 #endif /* core_audio_output_hpp */
