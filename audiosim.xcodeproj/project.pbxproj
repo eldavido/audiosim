@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		21B9132C1D7B535800F94C37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B9132B1D7B535800F94C37 /* main.m */; };
+		21B913331D7B541300F94C37 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B913321D7B541300F94C37 /* CoreAudio.framework */; };
+		21B9133B1D7B5AD000F94C37 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B9133A1D7B5AD000F94C37 /* AudioUnit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		21B913281D7B535800F94C37 /* audiosim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = audiosim; sourceTree = BUILT_PRODUCTS_DIR; };
 		21B9132B1D7B535800F94C37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		21B913321D7B541300F94C37 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		21B9133A1D7B5AD000F94C37 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B9133B1D7B5AD000F94C37 /* AudioUnit.framework in Frameworks */,
+				21B913331D7B541300F94C37 /* CoreAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +47,8 @@
 		21B9131F1D7B535800F94C37 = {
 			isa = PBXGroup;
 			children = (
+				21B9133A1D7B5AD000F94C37 /* AudioUnit.framework */,
+				21B913321D7B541300F94C37 /* CoreAudio.framework */,
 				21B9132A1D7B535800F94C37 /* audiosim */,
 				21B913291D7B535800F94C37 /* Products */,
 			);
