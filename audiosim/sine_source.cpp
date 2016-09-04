@@ -14,7 +14,7 @@ SineSource::SineSource(float frequency) {
     mCoefficient = 2 * M_PI * mFrequency / SAMPLE_RATE;
 }
 
-void SineSource::render_next(float buf[], int count) {
+void SineSource::renderNext(float buf[], int count) {
     for (int i = 0; i < count; ++i) {
         buf[i] = sin(mCoefficient * (i+mSamplesGenerated));
     }

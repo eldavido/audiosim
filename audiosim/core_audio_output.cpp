@@ -17,7 +17,7 @@ CoreAudioOutput::CoreAudioOutput() {
     mSource3 = new SineSource(420);
 }
 
-void CoreAudioOutput::Init() {
+void CoreAudioOutput::init() {
     mOutput = AudioComponentFindNext(NULL, &mDefaultDescription);
     //NSCAssert(mOutput, "Can't find default output");
     
@@ -43,7 +43,7 @@ void CoreAudioOutput::Init() {
     mSrc3Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
 }
 
-void CoreAudioOutput::Start() {
+void CoreAudioOutput::start() {
     AudioOutputUnitStart(mOutputInstance);
     //NSCAssert1(err == noErr, @"Error starting unit: %hd", err);
 }
@@ -82,9 +82,9 @@ OSStatus CoreAudioOutput::render(AudioUnitRenderActionFlags *ioActionFlags,
     int channel = 0;
     Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
     
-    mSource1->render_next(mSrc1Buf, inNumberFrames);
-    mSource2->render_next(mSrc2Buf, inNumberFrames);
-    mSource3->render_next(mSrc3Buf, inNumberFrames);
+    mSource1->renderNext(mSrc1Buf, inNumberFrames);
+    mSource2->renderNext(mSrc2Buf, inNumberFrames);
+    mSource3->renderNext(mSrc3Buf, inNumberFrames);
     
     for (int i = 0; i < inNumberFrames; ++i) {
         buffer[i] = (0.33 * mSrc1Buf[i]) + (0.33 * mSrc2Buf[i]) + (0.33 * mSrc3Buf[i]);

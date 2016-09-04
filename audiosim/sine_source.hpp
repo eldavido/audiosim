@@ -15,15 +15,12 @@
 class SineSource {
 public:
     SineSource(float frequency);
-    void render_next(float buf[], int count);
+    void renderNext(float buf[], int count);
     
 private:
     float mFrequency;
     float mCoefficient;
     int mSamplesGenerated;
-    
-    
-    
 };
 
 #endif /* sine_source_hpp */

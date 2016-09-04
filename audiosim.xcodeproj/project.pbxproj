@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		214C5B991D7B8E15005B0BA7 /* sine_source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214C5B971D7B8E15005B0BA7 /* sine_source.cpp */; };
+		214C5BA01D7BC447005B0BA7 /* task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214C5B9E1D7BC447005B0BA7 /* task.cpp */; };
+		214C5BA31D7BC487005B0BA7 /* task_scheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214C5BA11D7BC487005B0BA7 /* task_scheduler.cpp */; };
+		214C5BA91D7BC69B005B0BA7 /* two_state_task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 214C5BA71D7BC69B005B0BA7 /* two_state_task.cpp */; };
 		21B9132C1D7B535800F94C37 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21B9132B1D7B535800F94C37 /* main.mm */; };
 		21B913331D7B541300F94C37 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B913321D7B541300F94C37 /* CoreAudio.framework */; };
 		21B9133B1D7B5AD000F94C37 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B9133A1D7B5AD000F94C37 /* AudioUnit.framework */; };
@@ -30,6 +33,13 @@
 		214C5B971D7B8E15005B0BA7 /* sine_source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sine_source.cpp; sourceTree = "<group>"; };
 		214C5B981D7B8E15005B0BA7 /* sine_source.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sine_source.hpp; sourceTree = "<group>"; };
 		214C5B9A1D7B933E005B0BA7 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		214C5B9E1D7BC447005B0BA7 /* task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = task.cpp; sourceTree = "<group>"; };
+		214C5B9F1D7BC447005B0BA7 /* task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = task.hpp; sourceTree = "<group>"; };
+		214C5BA11D7BC487005B0BA7 /* task_scheduler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = task_scheduler.cpp; sourceTree = "<group>"; };
+		214C5BA21D7BC487005B0BA7 /* task_scheduler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = task_scheduler.hpp; sourceTree = "<group>"; };
+		214C5BA71D7BC69B005B0BA7 /* two_state_task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = two_state_task.cpp; sourceTree = "<group>"; };
+		214C5BA81D7BC69B005B0BA7 /* two_state_task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = two_state_task.hpp; sourceTree = "<group>"; };
+		214C5BAA1D7BD469005B0BA7 /* run_request.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = run_request.hpp; sourceTree = "<group>"; };
 		21B913281D7B535800F94C37 /* audiosim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = audiosim; sourceTree = BUILT_PRODUCTS_DIR; };
 		21B9132B1D7B535800F94C37 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		21B913321D7B541300F94C37 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -78,6 +88,13 @@
 				214C5B971D7B8E15005B0BA7 /* sine_source.cpp */,
 				214C5B981D7B8E15005B0BA7 /* sine_source.hpp */,
 				214C5B9A1D7B933E005B0BA7 /* constants.h */,
+				214C5B9E1D7BC447005B0BA7 /* task.cpp */,
+				214C5B9F1D7BC447005B0BA7 /* task.hpp */,
+				214C5BA11D7BC487005B0BA7 /* task_scheduler.cpp */,
+				214C5BA21D7BC487005B0BA7 /* task_scheduler.hpp */,
+				214C5BA71D7BC69B005B0BA7 /* two_state_task.cpp */,
+				214C5BA81D7BC69B005B0BA7 /* two_state_task.hpp */,
+				214C5BAA1D7BD469005B0BA7 /* run_request.hpp */,
 			);
 			path = audiosim;
 			sourceTree = "<group>";
@@ -138,9 +155,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				214C5BA31D7BC487005B0BA7 /* task_scheduler.cpp in Sources */,
+				214C5BA91D7BC69B005B0BA7 /* two_state_task.cpp in Sources */,
 				21B9133E1D7B6F4700F94C37 /* core_audio_output.cpp in Sources */,
 				21B9132C1D7B535800F94C37 /* main.mm in Sources */,
 				214C5B991D7B8E15005B0BA7 /* sine_source.cpp in Sources */,
+				214C5BA01D7BC447005B0BA7 /* task.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

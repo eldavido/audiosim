@@ -19,8 +19,8 @@
 class CoreAudioOutput {
 public:
     CoreAudioOutput();
-    void Init();
-    void Start();
+    void init();
+    void start();
   
 private:
     AudioComponentDescription mDefaultDescription;
