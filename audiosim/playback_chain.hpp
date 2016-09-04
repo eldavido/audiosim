@@ -9,12 +9,21 @@
 #ifndef playback_chain_hpp
 #define playback_chain_hpp
 
+#include "playback_command.hpp"
+
+class Mixer;
 class Scheduler;
 
 class PlaybackChain {
 public:
-    PlaybackChain();
+    PlaybackChain(Mixer &m);
     virtual void run(Scheduler &ts);
+
+protected:
+    void sendCommand(playback_command_t *);
+
+private:
+    Mixer &_mixer;
 };
 
 #endif /* playback_chain_hpp */

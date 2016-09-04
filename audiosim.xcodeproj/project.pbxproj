@@ -46,7 +46,7 @@
 		214C5BAC1D7BDED0005B0BA7 /* occasional_chain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = occasional_chain.hpp; sourceTree = "<group>"; };
 		21B2EE021D7CB2E9009CD7EC /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
 		21B2EE031D7CB2E9009CD7EC /* mixer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mixer.hpp; sourceTree = "<group>"; };
-		21B2EE071D7CB452009CD7EC /* playback_command.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = playback_command.h; sourceTree = "<group>"; };
+		21B2EE071D7CB452009CD7EC /* playback_command.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = playback_command.hpp; sourceTree = "<group>"; };
 		21B913281D7B535800F94C37 /* audiosim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = audiosim; sourceTree = BUILT_PRODUCTS_DIR; };
 		21B9132B1D7B535800F94C37 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		21B913321D7B541300F94C37 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -89,7 +89,7 @@
 			children = (
 				21B2EE021D7CB2E9009CD7EC /* mixer.cpp */,
 				21B2EE031D7CB2E9009CD7EC /* mixer.hpp */,
-				21B2EE071D7CB452009CD7EC /* playback_command.h */,
+				21B2EE071D7CB452009CD7EC /* playback_command.hpp */,
 			);
 			name = mixer;
 			sourceTree = "<group>";

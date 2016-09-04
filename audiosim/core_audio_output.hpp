@@ -19,7 +19,7 @@ class Mixer;
 
 class CoreAudioOutput {
 public:
-    CoreAudioOutput(const Mixer &m);
+    CoreAudioOutput(Mixer &m);
     void init();
     void start();
   
@@ -30,7 +30,7 @@ private:
     AudioStreamBasicDescription _streamFormat;
     AURenderCallbackStruct _renderCallback;
     long _renderedFrames;
-    const Mixer &_mixer;
+    Mixer &_mixer;
     
     void initializeConstantValuedStructures();
     static OSStatus coreAudioCallback(void *inRefCon,

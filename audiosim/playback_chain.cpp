@@ -7,9 +7,16 @@
 //
 
 #include "playback_chain.hpp"
+#include "mixer.hpp"
 
-PlaybackChain::PlaybackChain() { }
+class Mixer;
+
+PlaybackChain::PlaybackChain(Mixer &m) : _mixer(m) { }
 
 void PlaybackChain::run(Scheduler &ts) {
     return;
+}
+
+void PlaybackChain::sendCommand(playback_command_t *cmd) {
+    _mixer.enqueuePlaybackCmd(cmd);
 }

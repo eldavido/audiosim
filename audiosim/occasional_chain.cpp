@@ -11,11 +11,12 @@
 #include <iostream>
 #include <random>
 #include "scheduler.hpp"
+#include "playback_command.hpp"
 
-OccasionalChain::OccasionalChain(int minDelay, int maxDelay) {
+OccasionalChain::OccasionalChain(Mixer &m, int minDelay, int maxDelay) : PlaybackChain(m) {
     mState = 0;
     std::random_device rd;
-    mRng = std::mt19937(rd());
+    std::mt19937 rng(rd());
     mUniformDistribution = std::uniform_real_distribution<>(minDelay, maxDelay);
 }
 
@@ -25,14 +26,12 @@ void OccasionalChain::run(Scheduler &sched) {
     switch (mState) {
         case 0:
             delayMs = mUniformDistribution(mRng) * 1000;
-            std::cout << "occ task, delaying " << delayMs << "ms" << std::endl;
-            
             mState = 1;
             sched.scheduleDelayedExecutionRelative(*this, delayMs);
             break;
         case 1:
-            std::cout << "would play sound here" << std::endl;
-            
+            playback_command_t* cmd = (playback_command_t*) malloc(sizeof(playback_command_t));
+            sendCommand(cmd);
             mState = 0;
             sched.scheduleDelayedExecutionRelative(*this, 0);
             break;

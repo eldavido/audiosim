@@ -7,8 +7,9 @@
 //
 
 #include "core_audio_output.hpp"
+#include "mixer.hpp"
 
-CoreAudioOutput::CoreAudioOutput(const Mixer &m) : _mixer(m), _renderedFrames(0) {
+CoreAudioOutput::CoreAudioOutput(Mixer &m) : _mixer(m), _renderedFrames(0) {
     initializeConstantValuedStructures();
 }
 
@@ -67,18 +68,10 @@ OSStatus CoreAudioOutput::coreAudioCallback(void *inRefCon,
 }
 
 OSStatus CoreAudioOutput::render(AudioUnitRenderActionFlags *ioActionFlags,
-                                            const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
-                                            UInt32 inNumberFrames, AudioBufferList *ioData) {
+                                 const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
+                                 UInt32 inNumberFrames, AudioBufferList *ioData) {
     int channel = 0;
     Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
-    
-    //mSource1->renderNext(mSrc1Buf, inNumberFrames);
-    //mSource2->renderNext(mSrc2Buf, inNumberFrames);
-    //mSource3->renderNext(mSrc3Buf, inNumberFrames);
-    
-    //for (int i = 0; i < inNumberFrames; ++i) {
-    //    buffer[i] = (0.33 * mSrc1Buf[i]) + (0.33 * mSrc2Buf[i]) + (0.33 * mSrc3Buf[i]);
-    //}
-    
+    _mixer.getNextLPCMFrames((float*) buffer, (int) inNumberFrames);
     return noErr;
 }

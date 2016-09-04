@@ -15,7 +15,7 @@
 
 class OccasionalChain : public PlaybackChain {
 public:
-    OccasionalChain(int minDelaySecs, int maxDelaySecs);
+    OccasionalChain(Mixer &m, int minDelaySecs, int maxDelaySecs);
     void run(Scheduler &ts);
     
 private:

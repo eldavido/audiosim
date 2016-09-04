@@ -13,7 +13,7 @@
 
 class TwoStateChain : public PlaybackChain {
 public:
-    TwoStateChain(int delayMs);
+    TwoStateChain(Mixer &m, int delayMs);
     void run(Scheduler &ts);
     
 private:

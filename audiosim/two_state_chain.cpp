@@ -10,7 +10,7 @@
 #include "scheduler.hpp"
 #include "two_state_chain.hpp"
 
-TwoStateChain::TwoStateChain(int delayMs) {
+TwoStateChain::TwoStateChain(Mixer &m, int delayMs) : PlaybackChain(m) {
     mState = 0;
     mDelay = delayMs;
 }
