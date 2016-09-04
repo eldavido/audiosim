@@ -11,6 +11,7 @@
 
 #include <forward_list>
 #include <queue>
+#include "core_audio_output.hpp"
 #include "run_request.hpp"
 
 class Task;

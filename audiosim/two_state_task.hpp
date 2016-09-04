@@ -9,8 +9,6 @@
 #ifndef two_state_task_hpp
 #define two_state_task_hpp
 
-#include <iostream>
-
 #include "task.hpp"
 
 class TwoStateTask : public Task {

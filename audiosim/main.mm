@@ -11,6 +11,7 @@
 
 #include "core_audio_output.hpp"
 #include "task_scheduler.hpp"
+#include "occasional_task.hpp"
 #include "two_state_task.hpp"
 
 int main(int argc, const char * argv[]) {
@@ -21,6 +22,8 @@ int main(int argc, const char * argv[]) {
         
         TaskScheduler ts = TaskScheduler();
         
+        OccasionalTask *occT = new OccasionalTask(5, 15);
+        ts.add(occT);
         TwoStateTask *fastTst = new TwoStateTask(500);
         ts.add(fastTst);
         TwoStateTask *slowTst = new TwoStateTask(1000);

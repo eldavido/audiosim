@@ -6,6 +6,7 @@
 //  Copyright © 2016 David Albrecht. All rights reserved.
 //
 
+#include <iostream>
 #include "two_state_task.hpp"
 #include "task_scheduler.hpp"
 
