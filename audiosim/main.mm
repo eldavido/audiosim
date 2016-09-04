@@ -10,26 +10,34 @@
 #import <AudioUnit/AudioUnit.h>
 
 #include "core_audio_output.hpp"
-#include "task_scheduler.hpp"
-#include "occasional_task.hpp"
-#include "two_state_task.hpp"
+#include "mixer.hpp"
+#include "occasional_chain.hpp"
+#include "scheduler.hpp"
+#include "two_state_chain.hpp"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        //CoreAudioOutput* op = new CoreAudioOutput();
-        //op->Init();
+        // Audio mixer writes PCM output to OS-level audio output, based on
+        // commands received from playback chains
+        Mixer m = Mixer();
+        
+        // Scheduler implements a run loop (single-threaded) over the playback
+        // chains, allowing them to enqueue playback tasks for the mixer
+        Scheduler s = Scheduler();
+        
+        OccasionalChain occChain(5, 15);
+        s.add(occChain);
+        TwoStateChain fastTst(500);
+        s.add(fastTst);
+        TwoStateChain slowTst(1000);
+        s.add(slowTst);
+        
+        //CoreAudioOutput op = CoreAudioOutput(m);
+        //p.init();
         //op->Start();
         
-        TaskScheduler ts = TaskScheduler();
-        
-        OccasionalTask *occT = new OccasionalTask(5, 15);
-        ts.add(occT);
-        TwoStateTask *fastTst = new TwoStateTask(500);
-        ts.add(fastTst);
-        TwoStateTask *slowTst = new TwoStateTask(1000);
-        ts.add(slowTst);
-        
-        ts.run();
+        s.run();
     }
+    
     return 0;
 }

@@ -7,17 +7,17 @@
 //
 
 #include <iostream>
-#include "two_state_task.hpp"
-#include "task_scheduler.hpp"
+#include "scheduler.hpp"
+#include "two_state_chain.hpp"
 
-TwoStateTask::TwoStateTask(int delayMs) {
+TwoStateChain::TwoStateChain(int delayMs) {
     mState = 0;
     mDelay = delayMs;
 }
 
-void TwoStateTask::run(TaskScheduler *ts) {
+void TwoStateChain::run(Scheduler &sched) {
     std::cout << "In two state task, delay: " << mDelay << " " << std::endl;
     
     mState = (mState + 1) % 2;
-    ts->scheduleDelayedExecutionRelative(this, mDelay);
+    sched.scheduleDelayedExecutionRelative(*this, mDelay);
 }

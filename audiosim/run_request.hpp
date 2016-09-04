@@ -9,11 +9,11 @@
 #ifndef run_request_h
 #define run_request_h
 
-class Task;
+class PlaybackChain;
 
 struct run_request {
     long run_at_ms_time;
-    Task* t;
+    PlaybackChain *t;
 };
 
 typedef struct run_request run_request_t;

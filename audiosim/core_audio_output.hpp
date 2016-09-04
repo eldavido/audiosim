@@ -14,21 +14,23 @@
 #include <math.h>
 #include <stdlib.h>
 #include "constants.h"
-#include "sine_source.hpp"
+
+class Mixer;
 
 class CoreAudioOutput {
 public:
-    CoreAudioOutput();
+    CoreAudioOutput(const Mixer &m);
     void init();
     void start();
   
 private:
-    AudioComponentDescription mDefaultDescription;
-    AudioComponent mOutput;
-    AudioComponentInstance mOutputInstance;
-    AudioStreamBasicDescription mStreamFormat;
-    AURenderCallbackStruct mRenderCallback;
-    long mRenderedFrames;
+    AudioComponentDescription _defaultDescription;
+    AudioComponent _output;
+    AudioComponentInstance _outputInstance;
+    AudioStreamBasicDescription _streamFormat;
+    AURenderCallbackStruct _renderCallback;
+    long _renderedFrames;
+    const Mixer &_mixer;
     
     void initializeConstantValuedStructures();
     static OSStatus coreAudioCallback(void *inRefCon,
@@ -39,14 +41,6 @@ private:
     OSStatus render(AudioUnitRenderActionFlags *ioActionFlags,
                 const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber,
                 UInt32 inNumberFrames, AudioBufferList *ioData);
-    
-    SineSource *mSource1;
-    SineSource *mSource2;
-    SineSource *mSource3;
-    
-    float *mSrc1Buf;
-    float *mSrc2Buf;
-    float *mSrc3Buf;
 };
 
 #endif /* core_audio_output_hpp */

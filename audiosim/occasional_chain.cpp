@@ -1,24 +1,25 @@
 //
-//  occasional_task.cpp
+//  occasional_chain.cpp
 //  audiosim
 //
 //  Created by David Albrecht on 9/3/16.
 //  Copyright © 2016 David Albrecht. All rights reserved.
 //
 
+#include "occasional_chain.hpp"
+
 #include <iostream>
 #include <random>
-#include "task_scheduler.hpp"
-#include "occasional_task.hpp"
+#include "scheduler.hpp"
 
-OccasionalTask::OccasionalTask(int minDelay, int maxDelay) {
+OccasionalChain::OccasionalChain(int minDelay, int maxDelay) {
     mState = 0;
     std::random_device rd;
     mRng = std::mt19937(rd());
     mUniformDistribution = std::uniform_real_distribution<>(minDelay, maxDelay);
 }
 
-void OccasionalTask::run(TaskScheduler *ts) {
+void OccasionalChain::run(Scheduler &sched) {
     int delayMs;
     
     switch (mState) {
@@ -27,13 +28,13 @@ void OccasionalTask::run(TaskScheduler *ts) {
             std::cout << "occ task, delaying " << delayMs << "ms" << std::endl;
             
             mState = 1;
-            ts->scheduleDelayedExecutionRelative(this, delayMs);
+            sched.scheduleDelayedExecutionRelative(*this, delayMs);
             break;
         case 1:
             std::cout << "would play sound here" << std::endl;
             
             mState = 0;
-            ts->scheduleDelayedExecutionRelative(this, 0);
+            sched.scheduleDelayedExecutionRelative(*this, 0);
             break;
     }
 }

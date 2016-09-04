@@ -8,64 +8,54 @@
 
 #include "core_audio_output.hpp"
 
-CoreAudioOutput::CoreAudioOutput() {
+CoreAudioOutput::CoreAudioOutput(const Mixer &m) : _mixer(m), _renderedFrames(0) {
     initializeConstantValuedStructures();
-    mRenderedFrames = 0;
-    
-    mSource1 = new SineSource(440);
-    mSource2 = new SineSource(430);
-    mSource3 = new SineSource(420);
 }
 
 void CoreAudioOutput::init() {
-    mOutput = AudioComponentFindNext(NULL, &mDefaultDescription);
+    _output = AudioComponentFindNext(NULL, &_defaultDescription);
     //NSCAssert(mOutput, "Can't find default output");
     
-    OSErr err = ::AudioComponentInstanceNew(mOutput, &mOutputInstance);
+    OSErr err = ::AudioComponentInstanceNew(_output, &_outputInstance);
     //NSCAssert1(mOutputInstance, @"Error creating unit %hd", err);
     
     // Set the render callback
-    err = AudioUnitSetProperty(mOutputInstance, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input,
-                               0, &mRenderCallback, sizeof(AURenderCallbackStruct));
+    err = AudioUnitSetProperty(_outputInstance, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input,
+                               0, &_renderCallback, sizeof(AURenderCallbackStruct));
     //NSCAssert1(err == noErr, @"Error setting callback: %hd", err);
     
     // Set the stream description
-    err = AudioUnitSetProperty(mOutputInstance, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
-                               0, &mStreamFormat, sizeof(mStreamFormat));
+    err = AudioUnitSetProperty(_outputInstance, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
+                               0, &_streamFormat, sizeof(_streamFormat));
     //NSCAssert1(err == noErr, @"Error setting stream format: %hd", err);
     
-    err = AudioUnitInitialize(mOutputInstance);
+    err = AudioUnitInitialize(_outputInstance);
     //NSCAssert1(err == noErr, @"Error initializing unit: %hd", err);
-    
-    // Allocate 0.5s worth of output buffer; this should be plenty.
-    mSrc1Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
-    mSrc2Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
-    mSrc3Buf = (float *)malloc(SAMPLE_RATE * 0.5 * sizeof(float));
 }
 
 void CoreAudioOutput::start() {
-    AudioOutputUnitStart(mOutputInstance);
+    AudioOutputUnitStart(_outputInstance);
     //NSCAssert1(err == noErr, @"Error starting unit: %hd", err);
 }
 
 void CoreAudioOutput::initializeConstantValuedStructures() {
-    mDefaultDescription.componentType = kAudioUnitType_Output;
-    mDefaultDescription.componentSubType = kAudioUnitSubType_DefaultOutput;
-    mDefaultDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-    mDefaultDescription.componentFlags = 0;
-    mDefaultDescription.componentFlagsMask = 0;
+    _defaultDescription.componentType = kAudioUnitType_Output;
+    _defaultDescription.componentSubType = kAudioUnitSubType_DefaultOutput;
+    _defaultDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    _defaultDescription.componentFlags = 0;
+    _defaultDescription.componentFlagsMask = 0;
     
-    mStreamFormat.mSampleRate = SAMPLE_RATE;
-    mStreamFormat.mFormatID = kAudioFormatLinearPCM;
-    mStreamFormat.mFormatFlags = kAudioFormatFlagIsFloat;
-    mStreamFormat.mBytesPerPacket = 4;   // float32
-    mStreamFormat.mFramesPerPacket = 1;
-    mStreamFormat.mBytesPerFrame = 4;    // float32
-    mStreamFormat.mChannelsPerFrame = 1; // mono
-    mStreamFormat.mBitsPerChannel = 32;  // float32
+    _streamFormat.mSampleRate = SAMPLE_RATE;
+    _streamFormat.mFormatID = kAudioFormatLinearPCM;
+    _streamFormat.mFormatFlags = kAudioFormatFlagIsFloat;
+    _streamFormat.mBytesPerPacket = 4;   // float32
+    _streamFormat.mFramesPerPacket = 1;
+    _streamFormat.mBytesPerFrame = 4;    // float32
+    _streamFormat.mChannelsPerFrame = 1; // mono
+    _streamFormat.mBitsPerChannel = 32;  // float32
     
-    mRenderCallback.inputProc = coreAudioCallback;
-    mRenderCallback.inputProcRefCon = this;
+    _renderCallback.inputProc = coreAudioCallback;
+    _renderCallback.inputProcRefCon = this;
 }
 
 OSStatus CoreAudioOutput::coreAudioCallback(void *inRefCon,
@@ -82,13 +72,13 @@ OSStatus CoreAudioOutput::render(AudioUnitRenderActionFlags *ioActionFlags,
     int channel = 0;
     Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
     
-    mSource1->renderNext(mSrc1Buf, inNumberFrames);
-    mSource2->renderNext(mSrc2Buf, inNumberFrames);
-    mSource3->renderNext(mSrc3Buf, inNumberFrames);
+    //mSource1->renderNext(mSrc1Buf, inNumberFrames);
+    //mSource2->renderNext(mSrc2Buf, inNumberFrames);
+    //mSource3->renderNext(mSrc3Buf, inNumberFrames);
     
-    for (int i = 0; i < inNumberFrames; ++i) {
-        buffer[i] = (0.33 * mSrc1Buf[i]) + (0.33 * mSrc2Buf[i]) + (0.33 * mSrc3Buf[i]);
-    }
+    //for (int i = 0; i < inNumberFrames; ++i) {
+    //    buffer[i] = (0.33 * mSrc1Buf[i]) + (0.33 * mSrc2Buf[i]) + (0.33 * mSrc3Buf[i]);
+    //}
     
     return noErr;
 }

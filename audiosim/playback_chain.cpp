@@ -1,15 +1,15 @@
 //
-//  task.cpp
+//  playback_chain.cpp
 //  audiosim
 //
 //  Created by David Albrecht on 9/3/16.
 //  Copyright © 2016 David Albrecht. All rights reserved.
 //
 
-#include "task.hpp"
+#include "playback_chain.hpp"
 
-Task::Task() { }
+PlaybackChain::PlaybackChain() { }
 
-void Task::run(TaskScheduler *ts) {
+void PlaybackChain::run(Scheduler &ts) {
     return;
 }

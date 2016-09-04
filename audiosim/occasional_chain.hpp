@@ -6,16 +6,17 @@
 //  Copyright © 2016 David Albrecht. All rights reserved.
 //
 
-#ifndef occasional_task_hpp
-#define occasional_task_hpp
+#ifndef occasional_chain_hpp
+#define occasional_chain_hpp
 
-#include "task.hpp"
+#include "playback_chain.hpp"
+
 #include <random>
 
-class OccasionalTask : public Task {
+class OccasionalChain : public PlaybackChain {
 public:
-    OccasionalTask(int minDelaySecs, int maxDelaySecs);
-    void run(TaskScheduler *ts);
+    OccasionalChain(int minDelaySecs, int maxDelaySecs);
+    void run(Scheduler &ts);
     
 private:
     int mState;
@@ -27,4 +28,4 @@ private:
     std::uniform_real_distribution<> mUniformDistribution;
 };
 
-#endif /* occasional_task_hpp */
+#endif /* occasional_chain_hpp */
